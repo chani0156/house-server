@@ -1,18 +1,18 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import * as HouseService from '../services/houseService';
 
-export const createHouse = async (req: Request, res: Response) => {
+//Create a new house record
+export const createHouse = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { address, currentValue, loanAmount } = req.body;
     const newHouse = await HouseService.createHouse(address, currentValue, loanAmount);
     res.status(201).json(newHouse);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred' });
-  }
+    next(error);  }
 };
 
-export const getHouseById = async (req: Request, res: Response) => {
+//Retrieve a house by its ID.
+export const getHouseById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const houseId = +req.params.id;
     const house = await HouseService.getHouseById(houseId);
@@ -22,12 +22,12 @@ export const getHouseById = async (req: Request, res: Response) => {
       res.json(house);
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred' });
+    next(error);
   }
 };
 
-export const updateHouse = async (req: Request, res: Response) => {
+//Update house details
+export const updateHouse = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const houseId = +req.params.id;
     const { address, currentValue, loanAmount } = req.body;
@@ -38,7 +38,6 @@ export const updateHouse = async (req: Request, res: Response) => {
       res.json(updatedHouse);
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred' });
+    next(error);
   }
 };

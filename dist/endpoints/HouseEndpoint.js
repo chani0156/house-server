@@ -34,19 +34,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateHouse = exports.getHouseById = exports.createHouse = void 0;
 const HouseService = __importStar(require("../services/houseService"));
-const createHouse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+//Create a new house record
+const createHouse = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { address, currentValue, loanAmount } = req.body;
         const newHouse = yield HouseService.createHouse(address, currentValue, loanAmount);
         res.status(201).json(newHouse);
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An error occurred' });
+        next(error);
     }
 });
 exports.createHouse = createHouse;
-const getHouseById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+//Retrieve a house by its ID.
+const getHouseById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const houseId = +req.params.id;
         const house = yield HouseService.getHouseById(houseId);
@@ -58,12 +59,12 @@ const getHouseById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An error occurred' });
+        next(error);
     }
 });
 exports.getHouseById = getHouseById;
-const updateHouse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+//Update house details
+const updateHouse = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const houseId = +req.params.id;
         const { address, currentValue, loanAmount } = req.body;
@@ -76,8 +77,7 @@ const updateHouse = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An error occurred' });
+        next(error);
     }
 });
 exports.updateHouse = updateHouse;

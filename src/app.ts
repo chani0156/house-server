@@ -4,22 +4,33 @@ import bodyParser from 'body-parser';
 import router from './routes';
 import { sequelize } from './config/database';
 import dotenv from 'dotenv';
-import { handleInternalServerError, handleNotFoundError } from './middleware/errorMiddleware';
-
+import errorMiddleware from './middleware/errorMiddleware';
+import morgan from 'morgan';
+import path from 'path';
 const cors = require('cors'); 
 const app = express();
+import fs from 'fs';
 
 
 //CONFIGURATION
+const ORIGIN = process.env.ORIGIN
 const corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: ORIGIN,
   };
   
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use('/api', router);
-app.use(handleNotFoundError);
-app.use(handleInternalServerError);
+app.use(errorMiddleware);
+
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, 'access.log'),
+  { flags: 'a' }
+);
+
+// Use morgan middleware for request logging
+app.use(morgan('combined', { stream: accessLogStream }));
+
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
