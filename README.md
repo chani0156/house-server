@@ -1,28 +1,10 @@
-<h1 align="center">Welcome to house-server 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
-  </a>
-</p>
+## Installation
 
-> house-api-server
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install`.
 
-## Install
+## Usage
 
-```sh
-node dist/app.js
-```
-
-## Run tests
-
-```sh
-npm run test
-```
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+To start the development server, run:
+node/dist/app.js
