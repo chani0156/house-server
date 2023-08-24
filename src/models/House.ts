@@ -1,4 +1,4 @@
-// src/models/House.ts
+
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
 

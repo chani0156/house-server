@@ -1,4 +1,4 @@
-// src/routes/index.ts
+
 import express from 'express';
 import { createHouse, getHouseById, updateHouse } from '../endpoints/houseEndpoint';
 

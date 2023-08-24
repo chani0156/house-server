@@ -25,7 +25,7 @@ export const updateHouse = async (houseId: number, address: string, currentValue
   const risk = calculateRisk(loanAmount, currentValue);
   const house = await House.findByPk(houseId);
   if (!house) {
-    return null; // Handle not found scenario accordingly
+    return null; 
   }
   await house.update({ address, currentValue, loanAmount, risk });
   return house;

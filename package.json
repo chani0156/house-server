@@ -22,5 +22,8 @@
     "sequelize": "^6.32.1",
     "sequelize-typescript": "^2.1.5",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "readme-md-generator": "^1.0.0"
   }
 }

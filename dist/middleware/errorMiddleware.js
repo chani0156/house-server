@@ -1,5 +1,4 @@
 "use strict";
-// src/middleware/errorHandlers.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleInternalServerError = exports.handleNotFoundError = exports.CustomError = void 0;
 class CustomError extends Error {

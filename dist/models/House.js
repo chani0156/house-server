@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// src/models/House.ts
 const sequelize_1 = require("sequelize");
 const database_1 = require("../config/database");
 class House extends sequelize_1.Model {

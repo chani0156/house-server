@@ -37,7 +37,7 @@ const updateHouse = (houseId, address, currentValue, loanAmount) => __awaiter(vo
     const risk = calculateRisk(loanAmount, currentValue);
     const house = yield House_1.default.findByPk(houseId);
     if (!house) {
-        return null; // Handle not found scenario accordingly
+        return null;
     }
     yield house.update({ address, currentValue, loanAmount, risk });
     return house;
