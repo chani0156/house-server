@@ -38,12 +38,20 @@ const getHouseById = (houseId) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getHouseById = getHouseById;
 //Update house details
 const updateHouse = (houseId, address, currentValue, loanAmount) => __awaiter(void 0, void 0, void 0, function* () {
-    const risk = calculateRisk(loanAmount, currentValue);
     const house = yield House_1.default.findByPk(houseId);
     if (!house) {
         return null;
     }
-    yield house.update({ address, currentValue, loanAmount, risk });
+    // Check if currentValue or loanAmount is updated
+    if (currentValue !== house.currentValue || loanAmount !== house.loanAmount) {
+        // Recalculate risk based on updated values
+        const newRisk = calculateRisk(loanAmount, currentValue);
+        yield house.update({ address, currentValue, loanAmount, risk: newRisk });
+    }
+    else {
+        // If neither currentValue nor loanAmount is updated, only update the address
+        yield house.update({ address });
+    }
     return house;
 });
 exports.updateHouse = updateHouse;

@@ -26,11 +26,20 @@ export const getHouseById = async (houseId: number) => {
 
 //Update house details
 export const updateHouse = async (houseId: number, address: string, currentValue: number, loanAmount: number) => {
-  const risk = calculateRisk(loanAmount, currentValue);
   const house = await House.findByPk(houseId);
   if (!house) {
     return null; 
   }
-  await house.update({ address, currentValue, loanAmount, risk });
+
+  // Check if currentValue or loanAmount is updated
+  if (currentValue !== house.currentValue || loanAmount !== house.loanAmount) {
+    // Recalculate risk based on updated values
+    const newRisk = calculateRisk(loanAmount, currentValue);
+    await house.update({ address, currentValue, loanAmount, risk: newRisk });
+  } else {
+    // If neither currentValue nor loanAmount is updated, only update the address
+    await house.update({ address });
+  }
+
   return house;
 };
