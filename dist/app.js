@@ -14,6 +14,7 @@ const path_1 = __importDefault(require("path"));
 const cors = require('cors');
 const app = (0, express_1.default)();
 const fs_1 = __importDefault(require("fs"));
+dotenv_1.default.config();
 //CONFIGURATION
 const ORIGIN = process.env.ORIGIN;
 const corsOptions = {
@@ -26,7 +27,6 @@ app.use(errorMiddleware_1.default);
 const accessLogStream = fs_1.default.createWriteStream(path_1.default.join(__dirname, 'access.log'), { flags: 'a' });
 // Use morgan middleware for request logging
 app.use((0, morgan_1.default)('combined', { stream: accessLogStream }));
-dotenv_1.default.config();
 const PORT = process.env.PORT || 3000;
 database_1.sequelize
     .sync()

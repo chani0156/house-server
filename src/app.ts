@@ -11,6 +11,7 @@ const cors = require('cors');
 const app = express();
 import fs from 'fs';
 
+dotenv.config();
 
 //CONFIGURATION
 const ORIGIN = process.env.ORIGIN
@@ -32,7 +33,7 @@ const accessLogStream = fs.createWriteStream(
 app.use(morgan('combined', { stream: accessLogStream }));
 
 
-dotenv.config();
+
 const PORT = process.env.PORT || 3000;
 
 sequelize
